@@ -96,7 +96,7 @@ export default function Pricing({ onCtaClick }: PricingProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`relative rounded-2xl ${
+              className={`relative rounded-2xl h-full ${
                 tier.highlighted
                   ? 'bg-white border-2 border-blue-500 shadow-strong'
                   : 'bg-white border border-gray-200 shadow-soft'
@@ -111,7 +111,7 @@ export default function Pricing({ onCtaClick }: PricingProps) {
                 </div>
               )}
 
-              <div className="p-8">
+              <div className="p-8 h-full flex flex-col">
                 {/* Header */}
                 <div className="mb-6">
                   <h3 className="font-display text-xl font-bold text-text-primary mb-2">
@@ -143,7 +143,7 @@ export default function Pricing({ onCtaClick }: PricingProps) {
                 </div>
 
                 {/* Features */}
-                <ul className="space-y-3 mb-8">
+                <ul className="space-y-3 mb-8 flex-1">
                   {tier.features.map((feature, i) => (
                     <li key={i} className="flex items-start gap-3 text-sm text-text-secondary">
                       <svg
