@@ -3,47 +3,51 @@
 import { motion } from 'framer-motion';
 
 const logos = [
-  { name: 'McKinsey' },
-  { name: 'Sequoia' },
-  { name: 'Slow Ventures' },
-  { name: 'Techstars' },
-  { name: 'Thumbtack' },
-  { name: 'Unito' },
+  { name: 'McKinsey', style: 'serif' },
+  { name: 'Sequoia', style: 'caps' },
+  { name: 'Slow Ventures', style: 'lowercase' },
+  { name: 'Techstars', style: 'bold' },
+  { name: 'Thumbtack', style: 'icon' },
+  { name: 'Unito', style: 'modern' },
 ];
 
 export default function TrustBar() {
   return (
-    <section className="relative py-16 border-y border-gray-100 bg-gray-50/50">
+    <section className="relative py-12 bg-white">
       <div className="max-w-6xl mx-auto px-6">
-        <motion.p
+        <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center text-sm text-text-muted mb-8 uppercase tracking-wider"
+          className="flex flex-col items-center"
         >
-          Built by teams with experience from
-        </motion.p>
+          {/* Label with decorative lines */}
+          <div className="flex items-center gap-4 mb-8 w-full max-w-2xl">
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent to-gray-200" />
+            <span className="text-xs font-semibold text-text-muted uppercase tracking-[0.2em] whitespace-nowrap">
+              Built by teams with experience from
+            </span>
+            <div className="flex-1 h-px bg-gradient-to-l from-transparent to-gray-200" />
+          </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="flex flex-wrap items-center justify-center gap-8 md:gap-12 lg:gap-16"
-        >
-          {logos.map((logo, index) => (
-            <motion.div
-              key={logo.name}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.1 + index * 0.1 }}
-              className="text-gray-400 hover:text-gray-600 transition-colors duration-300"
-            >
-              <LogoSVG name={logo.name} />
-            </motion.div>
-          ))}
+          {/* Logo grid */}
+          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 md:gap-x-14">
+            {logos.map((logo, index) => (
+              <motion.div
+                key={logo.name}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.05 + index * 0.08 }}
+                className="group"
+              >
+                <div className="px-4 py-2 rounded-lg hover:bg-gray-50 transition-all duration-300">
+                  <LogoSVG name={logo.name} />
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>
@@ -51,55 +55,55 @@ export default function TrustBar() {
 }
 
 function LogoSVG({ name }: { name: string }) {
+  const baseClass = "h-5 md:h-6 w-auto transition-all duration-300 text-gray-400 group-hover:text-gray-700";
+
   switch (name) {
     case 'McKinsey':
       return (
-        <svg viewBox="0 0 140 28" className="h-6 md:h-7 w-auto" fill="currentColor">
-          <text x="0" y="21" style={{ fontFamily: 'Georgia, serif', fontSize: '18px', fontStyle: 'italic', letterSpacing: '-0.5px' }}>
+        <svg viewBox="0 0 120 24" className={baseClass} fill="currentColor">
+          <text x="0" y="18" style={{ fontFamily: 'Georgia, serif', fontSize: '16px', fontStyle: 'italic', fontWeight: '500' }}>
             McKinsey
           </text>
         </svg>
       );
     case 'Sequoia':
       return (
-        <svg viewBox="0 0 120 28" className="h-6 md:h-7 w-auto" fill="currentColor">
-          <text x="0" y="20" style={{ fontFamily: 'system-ui', fontSize: '17px', fontWeight: '600', letterSpacing: '0.5px' }}>
+        <svg viewBox="0 0 100 24" className={baseClass} fill="currentColor">
+          <text x="0" y="17" style={{ fontFamily: 'system-ui', fontSize: '13px', fontWeight: '700', letterSpacing: '2px' }}>
             SEQUOIA
           </text>
         </svg>
       );
     case 'Slow Ventures':
       return (
-        <svg viewBox="0 0 150 28" className="h-6 md:h-7 w-auto" fill="currentColor">
-          <text x="0" y="20" style={{ fontFamily: 'system-ui', fontSize: '16px', fontWeight: '500', letterSpacing: '1px' }}>
+        <svg viewBox="0 0 120 24" className={baseClass} fill="currentColor">
+          <text x="0" y="17" style={{ fontFamily: 'system-ui', fontSize: '14px', fontWeight: '500', letterSpacing: '0.5px' }}>
             slow ventures
           </text>
         </svg>
       );
     case 'Techstars':
       return (
-        <svg viewBox="0 0 130 28" className="h-6 md:h-7 w-auto" fill="currentColor">
-          <text x="0" y="20" style={{ fontFamily: 'system-ui', fontSize: '16px', fontWeight: '700', letterSpacing: '0px' }}>
+        <svg viewBox="0 0 110 24" className={baseClass}>
+          <text x="0" y="17" fill="currentColor" style={{ fontFamily: 'system-ui', fontSize: '15px', fontWeight: '700' }}>
             techstars
           </text>
-          <text x="93" y="20" style={{ fontFamily: 'system-ui', fontSize: '16px', fontWeight: '700' }} fill="#2563eb">
-            *
-          </text>
+          <circle cx="100" cy="10" r="4" className="fill-blue-500 group-hover:fill-blue-600" />
         </svg>
       );
     case 'Thumbtack':
       return (
-        <svg viewBox="0 0 140 28" className="h-6 md:h-7 w-auto" fill="currentColor">
-          <circle cx="10" cy="14" r="6" fill="#2563eb" opacity="0.8" />
-          <text x="22" y="20" style={{ fontFamily: 'system-ui', fontSize: '17px', fontWeight: '600', letterSpacing: '-0.3px' }}>
+        <svg viewBox="0 0 120 24" className={baseClass}>
+          <circle cx="8" cy="12" r="5" className="fill-blue-500 group-hover:fill-blue-600" />
+          <text x="18" y="17" fill="currentColor" style={{ fontFamily: 'system-ui', fontSize: '15px', fontWeight: '600' }}>
             thumbtack
           </text>
         </svg>
       );
     case 'Unito':
       return (
-        <svg viewBox="0 0 100 28" className="h-6 md:h-7 w-auto" fill="currentColor">
-          <text x="0" y="20" style={{ fontFamily: 'system-ui', fontSize: '18px', fontWeight: '700', letterSpacing: '-0.5px' }}>
+        <svg viewBox="0 0 70 24" className={baseClass} fill="currentColor">
+          <text x="0" y="17" style={{ fontFamily: 'system-ui', fontSize: '16px', fontWeight: '800', letterSpacing: '-0.5px' }}>
             unito
           </text>
         </svg>

@@ -125,17 +125,50 @@ export default function HowItWorks() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-16 pt-16 border-t border-gray-200"
+          className="mt-20 pt-12"
         >
-          <p className="text-center text-sm text-text-muted mb-6 uppercase tracking-wider">
-            Integrates with the tools you already use
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-8 text-text-muted">
-            {['Zendesk', 'ServiceTitan', 'Jobber', 'HouseCall Pro', 'Google Calendar', 'Slack'].map((tool) => (
-              <span key={tool} className="text-sm font-medium hover:text-text-secondary transition-colors">
-                {tool}
-              </span>
+          {/* Label with decorative lines */}
+          <div className="flex items-center gap-4 mb-10 max-w-xl mx-auto">
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent to-gray-300" />
+            <span className="text-xs font-semibold text-text-muted uppercase tracking-[0.15em] whitespace-nowrap">
+              Integrates with your tools
+            </span>
+            <div className="flex-1 h-px bg-gradient-to-l from-transparent to-gray-300" />
+          </div>
+
+          {/* Integration cards */}
+          <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4">
+            {[
+              { name: 'Zendesk', icon: '💬' },
+              { name: 'ServiceTitan', icon: '🔧' },
+              { name: 'Jobber', icon: '📋' },
+              { name: 'HouseCall Pro', icon: '🏠' },
+              { name: 'Google Calendar', icon: '📅' },
+              { name: 'Slack', icon: '💼' },
+            ].map((tool, index) => (
+              <motion.div
+                key={tool.name}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: 0.5 + index * 0.05 }}
+                className="group flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-white border border-gray-200 shadow-sm hover:shadow-md hover:border-blue-300 transition-all duration-300"
+              >
+                <span className="text-lg">{tool.icon}</span>
+                <span className="text-sm font-medium text-text-secondary group-hover:text-text-primary transition-colors">
+                  {tool.name}
+                </span>
+              </motion.div>
             ))}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.3, delay: 0.8 }}
+              className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-blue-50 border border-blue-200"
+            >
+              <span className="text-sm font-semibold text-blue-600">+ 50 more</span>
+            </motion.div>
           </div>
         </motion.div>
       </div>
