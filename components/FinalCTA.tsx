@@ -29,7 +29,7 @@ export default function FinalCTA({ onCtaClick }: FinalCTAProps) {
             <span className="relative inline-flex rounded-full h-3 w-3 bg-orange-400"></span>
           </span>
           <span className="text-sm font-medium text-white">
-            New Year Launch Special — Limited Time
+            2026 Kickoff Special — January Only
           </span>
         </motion.div>
 
@@ -75,7 +75,7 @@ export default function FinalCTA({ onCtaClick }: FinalCTAProps) {
             </div>
             <div className="hidden md:block w-px h-16 bg-white/20" />
             <div className="text-sm text-blue-200 max-w-xs">
-              This isn&apos;t a gimmick—we&apos;re launching and want case studies. Early customers get the best deal we&apos;ll ever offer.
+              Start 2026 strong. Lock in this rate now and keep it all year—our way of helping you kick off the new year right.
             </div>
           </div>
         </motion.div>
