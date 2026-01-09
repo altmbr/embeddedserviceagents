@@ -64,42 +64,14 @@ export default function Footer() {
         </div>
 
         {/* Footer links */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
-          <div>
-            <h4 className="font-display font-semibold mb-4 text-text-primary">Product</h4>
-            <ul className="space-y-2 text-sm text-text-secondary">
-              <li><a href="#" className="hover:text-text-primary transition-colors">Features</a></li>
-              <li><a href="#" className="hover:text-text-primary transition-colors">Pricing</a></li>
-              <li><a href="#" className="hover:text-text-primary transition-colors">Integrations</a></li>
-              <li><a href="#" className="hover:text-text-primary transition-colors">API</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-display font-semibold mb-4 text-text-primary">Resources</h4>
-            <ul className="space-y-2 text-sm text-text-secondary">
-              <li><a href="#" className="hover:text-text-primary transition-colors">Blog</a></li>
-              <li><a href="#" className="hover:text-text-primary transition-colors">Case Studies</a></li>
-              <li><a href="#" className="hover:text-text-primary transition-colors">Help Center</a></li>
-              <li><a href="#" className="hover:text-text-primary transition-colors">Guides</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-display font-semibold mb-4 text-text-primary">Company</h4>
-            <ul className="space-y-2 text-sm text-text-secondary">
-              <li><a href="#" className="hover:text-text-primary transition-colors">About</a></li>
-              <li><a href="#" className="hover:text-text-primary transition-colors">Careers</a></li>
-              <li><a href="#" className="hover:text-text-primary transition-colors">Contact</a></li>
-              <li><a href="#" className="hover:text-text-primary transition-colors">Partners</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-display font-semibold mb-4 text-text-primary">Legal</h4>
-            <ul className="space-y-2 text-sm text-text-secondary">
-              <li><a href="#" className="hover:text-text-primary transition-colors">Privacy</a></li>
-              <li><a href="#" className="hover:text-text-primary transition-colors">Terms</a></li>
-              <li><a href="#" className="hover:text-text-primary transition-colors">Security</a></li>
-            </ul>
-          </div>
+        <div className="flex flex-wrap items-center justify-center gap-6 mb-12 text-sm text-text-secondary">
+          <a href="#how-it-works" className="hover:text-text-primary transition-colors">How It Works</a>
+          <span className="text-gray-300">•</span>
+          <a href="#pricing" className="hover:text-text-primary transition-colors">Pricing</a>
+          <span className="text-gray-300">•</span>
+          <a href="#testimonials" className="hover:text-text-primary transition-colors">Case Studies</a>
+          <span className="text-gray-300">•</span>
+          <a href="#faq" className="hover:text-text-primary transition-colors">FAQ</a>
         </div>
 
         {/* Bottom bar */}
