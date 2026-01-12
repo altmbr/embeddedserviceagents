@@ -1,0 +1,58 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <rect width="1200" height="630" fill="#0F172A"/>
+
+  <!-- Accent blobs -->
+  <circle cx="200" cy="150" r="300" fill="#4F46E5" opacity="0.15"/>
+  <circle cx="1000" cy="480" r="250" fill="#F97316" opacity="0.1"/>
+
+  <!-- Logo -->
+  <rect x="80" y="80" width="80" height="80" rx="16" fill="#4F46E5"/>
+  <path d="M120 100L96 140H112L110 160L134 120H118L120 100Z" fill="white"/>
+
+  <!-- Brand name -->
+  <text x="180" y="135" font-family="system-ui, -apple-system, sans-serif" font-size="48" font-weight="700" fill="white">
+    InboundAI
+  </text>
+
+  <!-- Tagline -->
+  <text x="80" y="250" font-family="system-ui, -apple-system, sans-serif" font-size="56" font-weight="800" fill="white">
+    Never Miss Another Lead
+  </text>
+
+  <!-- Description -->
+  <text x="80" y="330" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="400" fill="#94A3B8">
+    AI-powered phone, email, and chat agents that book
+  </text>
+  <text x="80" y="375" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="400" fill="#94A3B8">
+    appointments while you sleep
+  </text>
+
+  <!-- Stats bar -->
+  <g transform="translate(80, 460)">
+    <text x="0" y="30" font-family="system-ui, -apple-system, sans-serif" font-size="36" font-weight="700" fill="#4F46E5">
+      24/7
+    </text>
+    <text x="0" y="65" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="500" fill="#64748B">
+      Always Available
+    </text>
+  </g>
+
+  <g transform="translate(320, 460)">
+    <text x="0" y="30" font-family="system-ui, -apple-system, sans-serif" font-size="36" font-weight="700" fill="#F97316">
+      AI-Powered
+    </text>
+    <text x="0" y="65" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="500" fill="#64748B">
+      Smart Responses
+    </text>
+  </g>
+
+  <g transform="translate(640, 460)">
+    <text x="0" y="30" font-family="system-ui, -apple-system, sans-serif" font-size="36" font-weight="700" fill="#10B981">
+      Auto-Book
+    </text>
+    <text x="0" y="65" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="500" fill="#64748B">
+      Appointments
+    </text>
+  </g>
+</svg>
