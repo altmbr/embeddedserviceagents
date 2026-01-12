@@ -26,7 +26,7 @@ export default function Hero({ onCtaClick }: HeroProps) {
           className="inline-flex items-center px-4 py-2 mb-8 rounded-full bg-white border border-gray-200 shadow-soft"
         >
           <span className="text-sm text-text-secondary">
-            Built by teams that have scaled services businesses to <span className="text-text-primary font-semibold">$12M+ revenue</span>
+            Built by teams that have scaled their own service business to <span className="text-text-primary font-semibold">$12m/year of revenue</span>
           </span>
         </motion.div>
 
