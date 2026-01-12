@@ -18,7 +18,7 @@ export default function MobileFooterCTA({ onCtaClick }: MobileFooterCTAProps) {
         onClick={onCtaClick}
         className="btn btn-primary w-full py-3 text-base font-semibold"
       >
-        Book a free AI strategy call
+        Book a Free AI Strategy Call
       </button>
     </motion.div>
   );
