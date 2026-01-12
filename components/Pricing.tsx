@@ -20,7 +20,7 @@ const tiers = [
       'Standard integrations',
       'Email support',
     ],
-    cta: 'Start Free Trial',
+    cta: 'Book a Call',
     highlighted: false,
   },
   {
@@ -35,7 +35,7 @@ const tiers = [
       'Up to 500 calls/month',
       'Priority support',
     ],
-    cta: 'Start Free Trial',
+    cta: 'Book a Call',
     highlighted: true,
     badge: 'Most Popular',
   },
@@ -53,7 +53,7 @@ const tiers = [
       'Custom integrations',
       'SLA guarantee',
     ],
-    cta: 'Contact Sales',
+    cta: 'Book a Call',
     highlighted: false,
   },
 ];
