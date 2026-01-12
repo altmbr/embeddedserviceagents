@@ -10,8 +10,8 @@ const tiers = [
   {
     name: 'Starter',
     description: 'For growing businesses ready to stop missing calls',
-    price: '149',
-    unit: '/user/month',
+    price: '299',
+    unit: '/account/month',
     features: [
       '24/7 AI phone answering',
       'Email triage & auto-response',
@@ -26,15 +26,13 @@ const tiers = [
   {
     name: 'Professional',
     description: 'For established businesses wanting to maximize every lead',
-    price: '249',
-    unit: '/user/month',
+    price: '499',
+    unit: '/account/month',
     features: [
       'Everything in Starter, plus:',
       'Website visitor de-anonymization',
       'Automated outreach sequences',
-      'Embeddable chat widget',
       'Unlimited calls',
-      'CRM & scheduling integrations',
       'Priority support',
     ],
     cta: 'Start Free Trial',
@@ -43,13 +41,13 @@ const tiers = [
   },
   {
     name: 'Enterprise',
-    description: 'For multi-location operations needing full customization',
+    description: 'For larger operations needing full customization',
     price: 'Custom',
     unit: '',
     features: [
       'Everything in Professional, plus:',
-      'Multi-location support',
-      'Custom AI training',
+      'Embeddable chat widget',
+      'CRM & scheduling integrations',
       'Advanced analytics & reporting',
       'Dedicated account manager',
       'Custom integrations',
@@ -83,7 +81,7 @@ export default function Pricing({ onCtaClick }: PricingProps) {
             Simple, Transparent Pricing
           </h2>
           <p className="text-lg text-text-secondary max-w-2xl mx-auto">
-            No hidden fees. No long-term contracts. Pay per technician, scale as you grow.
+            No hidden fees. No long-term contracts. Pay per account, scale as you grow.
           </p>
         </motion.div>
 
