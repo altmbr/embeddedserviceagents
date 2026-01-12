@@ -191,9 +191,6 @@ export default function Pricing({ onCtaClick }: PricingProps) {
           className="mt-12 text-center"
         >
           <p className="text-sm text-text-muted">
-            All plans include a 14-day free trial. No credit card required.
-          </p>
-          <p className="text-sm text-text-muted mt-2">
             <span className="font-semibold text-orange-600">2026 Kickoff:</span> 50% off your first year when you sign up in January.
           </p>
         </motion.div>
