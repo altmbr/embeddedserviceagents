@@ -120,7 +120,7 @@ export default function Solution() {
                 transition={{ duration: 0.5, delay: index * 0.15 }}
                 className="group relative"
               >
-                <div className={`h-full p-8 rounded-2xl bg-white border ${colors.border} ${colors.hoverBorder} hover:shadow-medium transition-all duration-300`}>
+                <div className={`h-full p-8 rounded-2xl bg-white border ${colors.border} ${colors.hoverBorder} hover:shadow-medium transition-all duration-300 flex flex-col`}>
                   {/* Icon */}
                   <div className={`w-16 h-16 mb-6 rounded-xl ${colors.iconBg} border ${colors.iconBorder} flex items-center justify-center ${colors.iconText} group-hover:scale-110 transition-transform duration-300`}>
                     {solution.icon}
@@ -130,7 +130,7 @@ export default function Solution() {
                   <h3 className="font-display text-xl md:text-2xl font-bold mb-4 text-text-primary">
                     {solution.title}
                   </h3>
-                  <p className="text-text-secondary mb-6 leading-relaxed">
+                  <p className="text-text-secondary mb-6 leading-relaxed flex-grow">
                     {solution.description}
                   </p>
 
