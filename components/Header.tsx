@@ -63,10 +63,10 @@ export default function Header({ onCtaClick }: HeaderProps) {
           </a>
         </nav>
 
-        {/* CTA - w-auto overrides global mobile full-width btn rule */}
+        {/* CTA */}
         <button
           onClick={onCtaClick}
-          className="btn btn-primary py-2 sm:py-2.5 px-4 sm:px-5 text-xs sm:text-sm w-auto flex-shrink-0"
+          className="btn btn-primary btn-header py-2 sm:py-2.5 px-3 sm:px-5 text-xs sm:text-sm"
         >
           Book a Call
         </button>

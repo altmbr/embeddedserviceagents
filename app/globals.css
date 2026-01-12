@@ -309,7 +309,8 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 2rem !important;
   }
 
-  .btn {
+  /* Full-width buttons on mobile, except in header */
+  .btn:not(.btn-header) {
     width: 100%;
   }
 }
