@@ -14,7 +14,7 @@ const painPoints = [
     ),
   },
   {
-    stat: '2 AM',
+    stat: '11 PM',
     text: 'Your team can\'t answer phones then—but your customers are searching',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
