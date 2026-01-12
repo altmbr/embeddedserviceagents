@@ -63,10 +63,10 @@ export default function Header({ onCtaClick }: HeaderProps) {
           </a>
         </nav>
 
-        {/* CTA */}
+        {/* CTA - hidden on mobile, shown on sm+ */}
         <button
           onClick={onCtaClick}
-          className="btn btn-primary btn-header py-2 sm:py-2.5 px-3 sm:px-5 text-xs sm:text-sm"
+          className="hidden sm:flex btn btn-primary btn-header py-2.5 px-5 text-sm"
         >
           Book a Call
         </button>

@@ -13,6 +13,7 @@ import Pricing from '@/components/Pricing';
 import FAQ from '@/components/FAQ';
 import FinalCTA from '@/components/FinalCTA';
 import Footer from '@/components/Footer';
+import MobileFooterCTA from '@/components/MobileFooterCTA';
 import EmailModal, { useExitIntent } from '@/components/EmailModal';
 
 const CAL_URL = 'https://cal.com/altmbr/30min';
@@ -77,6 +78,9 @@ export default function Home() {
       <FAQ />
       <FinalCTA onCtaClick={handleCtaClick} />
       <Footer />
+
+      {/* Mobile sticky footer CTA */}
+      <MobileFooterCTA onCtaClick={handleCtaClick} />
 
       <EmailModal
         isOpen={isModalOpen}
