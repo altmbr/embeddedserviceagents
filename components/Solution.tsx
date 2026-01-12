@@ -99,8 +99,8 @@ export default function Solution() {
             The Solution
           </span>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-text-primary">
-            Your 24/7{' '}
-            <span className="stat-highlight">Revenue Recovery System</span>
+            Your superhuman{' '}
+            <span className="stat-highlight">24/7 customer agent</span>
           </h2>
           <p className="text-lg text-text-secondary max-w-2xl mx-auto">
             Three powerful systems working together to ensure you never miss another lead.

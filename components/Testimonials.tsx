@@ -124,7 +124,7 @@ export default function Testimonials() {
             { value: '157+', label: 'Service Businesses' },
             { value: '$4.2M', label: 'Revenue Generated' },
             { value: '98%', label: 'Customer Satisfaction' },
-            { value: '<3 min', label: 'Avg Response Time' },
+            { value: '<2 sec', label: 'Avg Response Time' },
           ].map((stat, index) => (
             <div key={index} className="text-center">
               <div className="font-display text-3xl md:text-4xl font-bold stat-highlight mb-2">
