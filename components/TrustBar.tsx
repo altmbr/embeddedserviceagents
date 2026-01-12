@@ -1,14 +1,14 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const logos = [
-  { name: 'McKinsey', style: 'serif' },
-  { name: 'Sequoia', style: 'caps' },
-  { name: 'Slow Ventures', style: 'lowercase' },
-  { name: 'Techstars', style: 'bold' },
-  { name: 'Thumbtack', style: 'icon' },
-  { name: 'Unito', style: 'modern' },
+  { name: 'McKinsey', file: '/logos/McKinsey.svg', width: 100, height: 31 },
+  { name: 'Sequoia', file: '/logos/Sequoia.svg', width: 100, height: 13 },
+  { name: 'Techstars', file: '/logos/Techstars.svg', width: 100, height: 18 },
+  { name: 'Thumbtack', file: '/logos/Thumbtack.svg', width: 100, height: 13 },
+  { name: 'Unito', file: '/logos/Unito.svg', width: 90, height: 29 },
 ];
 
 export default function TrustBar() {
@@ -43,7 +43,13 @@ export default function TrustBar() {
                 className="group"
               >
                 <div className="px-4 py-2 rounded-lg hover:bg-gray-50 transition-all duration-300">
-                  <LogoSVG name={logo.name} />
+                  <Image
+                    src={logo.file}
+                    alt={logo.name}
+                    width={logo.width}
+                    height={logo.height}
+                    className="h-5 md:h-6 w-auto opacity-50 grayscale group-hover:opacity-80 group-hover:grayscale-0 transition-all duration-300"
+                  />
                 </div>
               </motion.div>
             ))}
@@ -52,63 +58,4 @@ export default function TrustBar() {
       </div>
     </section>
   );
-}
-
-function LogoSVG({ name }: { name: string }) {
-  const baseClass = "h-5 md:h-6 w-auto transition-all duration-300 text-gray-400 group-hover:text-gray-700";
-
-  switch (name) {
-    case 'McKinsey':
-      return (
-        <svg viewBox="0 0 120 24" className={baseClass} fill="currentColor">
-          <text x="0" y="18" style={{ fontFamily: 'Georgia, serif', fontSize: '16px', fontStyle: 'italic', fontWeight: '500' }}>
-            McKinsey
-          </text>
-        </svg>
-      );
-    case 'Sequoia':
-      return (
-        <svg viewBox="0 0 100 24" className={baseClass} fill="currentColor">
-          <text x="0" y="17" style={{ fontFamily: 'system-ui', fontSize: '13px', fontWeight: '700', letterSpacing: '2px' }}>
-            SEQUOIA
-          </text>
-        </svg>
-      );
-    case 'Slow Ventures':
-      return (
-        <svg viewBox="0 0 120 24" className={baseClass} fill="currentColor">
-          <text x="0" y="17" style={{ fontFamily: 'system-ui', fontSize: '14px', fontWeight: '500', letterSpacing: '0.5px' }}>
-            slow ventures
-          </text>
-        </svg>
-      );
-    case 'Techstars':
-      return (
-        <svg viewBox="0 0 110 24" className={baseClass}>
-          <text x="0" y="17" fill="currentColor" style={{ fontFamily: 'system-ui', fontSize: '15px', fontWeight: '700' }}>
-            techstars
-          </text>
-          <circle cx="100" cy="10" r="4" className="fill-blue-500 group-hover:fill-blue-600" />
-        </svg>
-      );
-    case 'Thumbtack':
-      return (
-        <svg viewBox="0 0 120 24" className={baseClass}>
-          <circle cx="8" cy="12" r="5" className="fill-blue-500 group-hover:fill-blue-600" />
-          <text x="18" y="17" fill="currentColor" style={{ fontFamily: 'system-ui', fontSize: '15px', fontWeight: '600' }}>
-            thumbtack
-          </text>
-        </svg>
-      );
-    case 'Unito':
-      return (
-        <svg viewBox="0 0 70 24" className={baseClass} fill="currentColor">
-          <text x="0" y="17" style={{ fontFamily: 'system-ui', fontSize: '16px', fontWeight: '800', letterSpacing: '-0.5px' }}>
-            unito
-          </text>
-        </svg>
-      );
-    default:
-      return null;
-  }
 }
