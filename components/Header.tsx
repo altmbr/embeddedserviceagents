@@ -29,12 +29,12 @@ export default function Header({ onCtaClick }: HeaderProps) {
           : 'bg-transparent'
       }`}
     >
-      <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-4">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center shadow-md">
+        <a href="#" className="flex items-center gap-2 sm:gap-2.5 flex-shrink-0">
+          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center shadow-md">
             {/* Lightning bolt / instant response icon */}
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" className="sm:w-5 sm:h-5">
               <path
                 d="M11 1L3 12H10L9 19L17 8H10L11 1Z"
                 fill="white"
@@ -45,7 +45,7 @@ export default function Header({ onCtaClick }: HeaderProps) {
               />
             </svg>
           </div>
-          <span className="font-display font-bold text-lg text-text-primary hidden sm:block">
+          <span className="font-display font-bold text-base sm:text-lg text-text-primary">
             InboundAI
           </span>
         </a>
@@ -63,10 +63,10 @@ export default function Header({ onCtaClick }: HeaderProps) {
           </a>
         </nav>
 
-        {/* CTA */}
+        {/* CTA - w-auto overrides global mobile full-width btn rule */}
         <button
           onClick={onCtaClick}
-          className="btn btn-primary py-2.5 px-5 text-sm"
+          className="btn btn-primary py-2 sm:py-2.5 px-4 sm:px-5 text-xs sm:text-sm w-auto flex-shrink-0"
         >
           Book a Call
         </button>
