@@ -26,7 +26,7 @@ const tiers = [
   {
     name: 'Professional',
     description: 'For established businesses wanting to maximize every lead',
-    price: '499',
+    price: '699',
     unit: '/account/month',
     features: [
       'Everything in Starter, plus:',
