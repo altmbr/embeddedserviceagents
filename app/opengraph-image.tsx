@@ -118,7 +118,7 @@ export default async function Image() {
             <span style={{ fontSize: '16px', color: '#64748b' }}>Availability</span>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <span style={{ fontSize: '36px', fontWeight: 700, color: '#2563eb' }}>&lt;3 min</span>
+            <span style={{ fontSize: '36px', fontWeight: 700, color: '#2563eb' }}>&lt;3 sec</span>
             <span style={{ fontSize: '16px', color: '#64748b' }}>Response Time</span>
           </div>
         </div>
