@@ -19,8 +19,19 @@ export const analytics = {
   // ---- Funnel Step 2: CTA Engagement ----
   ctaClicked: (location: string, ctaText: string) => {
     posthog.capture('cta_clicked', {
-      cta_location: location, // e.g., 'hero', 'header', 'pricing', 'final_cta', 'mobile_footer'
+      cta_location: location, // e.g., 'hero', 'header', 'final_cta', 'mobile_footer'
       cta_text: ctaText,
+      funnel_step: 2,
+    });
+  },
+
+  // Dedicated pricing CTA tracking with tier details
+  pricingCtaClicked: (tierName: string, tierPrice: string) => {
+    posthog.capture('cta_clicked', {
+      cta_location: 'pricing',
+      cta_text: `${tierName} - Book a Call`,
+      pricing_tier: tierName.toLowerCase(), // 'starter', 'professional', 'enterprise'
+      pricing_tier_price: tierPrice, // '299', '699', 'Custom'
       funnel_step: 2,
     });
   },

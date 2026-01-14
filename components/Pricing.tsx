@@ -167,7 +167,7 @@ export default function Pricing() {
                 {/* CTA */}
                 <Link
                   href="/book"
-                  onClick={() => analytics.ctaClicked('pricing', `${tier.name} - ${tier.cta}`)}
+                  onClick={() => analytics.pricingCtaClicked(tier.name, tier.price)}
                   className={`w-full py-3 px-6 rounded-xl font-semibold transition-all duration-200 text-center ${
                     tier.highlighted
                       ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-md hover:shadow-lg'
