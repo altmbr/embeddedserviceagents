@@ -60,8 +60,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-lg md:text-xl text-text-secondary max-w-2xl mx-auto mb-10"
         >
-          Our AI agents answer every call, email, and website inquiry instantly—24/7.
-          Service businesses using our platform see{' '}
+          AI agents that answer every call, email, and inquiry instantly—24/7. Service businesses see{' '}
           <span className="text-text-primary font-semibold">80-230% more revenue</span>.
         </motion.p>
 
