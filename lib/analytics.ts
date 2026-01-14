@@ -92,9 +92,14 @@ export const analytics = {
       conversion_value: 1, // You can add monetary value here later
     });
 
-    // Meta Pixel - track as Lead conversion
+    // Meta Pixel - track as Lead conversion with full metadata
     if (typeof window !== 'undefined' && window.fbq) {
-      window.fbq('track', 'Lead');
+      window.fbq('track', 'Lead', {
+        content_name: '30 Minute Strategy Call',
+        content_category: 'booking',
+        value: 500.00, // Estimated lead value
+        currency: 'USD',
+      });
     }
   },
 
