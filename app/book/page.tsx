@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import Link from 'next/link';
-import { analytics, setupCalComTracking } from '@/lib/analytics';
+import { analytics } from '@/lib/analytics';
 
 export default function BookPage() {
   useEffect(() => {
@@ -23,18 +23,44 @@ export default function BookPage() {
       });
 
       Cal.ns["30min"]("ui", {"theme":"light","cssVarsPerTheme":{"light":{"cal-brand":"#2563eb"},"dark":{"cal-brand":"#2563eb"}},"hideEventTypeDetails":false,"layout":"month_view"});
+
+      // Track booking completed - fires Meta Pixel Lead event
+      Cal.ns["30min"]("on", {
+        action: "bookingSuccessful",
+        callback: function(e) {
+          console.log("Cal.com booking successful", e);
+          // Fire Meta Pixel Lead event
+          if (window.fbq) {
+            window.fbq('track', 'Lead', {
+              content_name: '30 Minute Strategy Call',
+              content_category: 'booking'
+            });
+          }
+          // Dispatch custom event for React to pick up
+          window.dispatchEvent(new CustomEvent('calBookingComplete', { detail: e.data }));
+        }
+      });
     `;
     document.body.appendChild(script);
 
-    // Set up Cal.com event tracking after script loads
-    const setupTracking = () => {
-      setTimeout(() => {
-        setupCalComTracking();
-      }, 2000); // Give Cal.com time to initialize
+    // Listen for booking complete event from Cal.com
+    const handleBookingComplete = (e: CustomEvent) => {
+      analytics.bookingCompleted({
+        date: e.detail?.date,
+        time: e.detail?.startTime,
+        email: e.detail?.attendee?.email,
+      });
+      if (e.detail?.attendee?.email) {
+        analytics.identifyUser(e.detail.attendee.email, {
+          name: e.detail.attendee.name,
+          booking_date: e.detail.date,
+        });
+      }
     };
-    script.onload = setupTracking;
+    window.addEventListener('calBookingComplete', handleBookingComplete as EventListener);
 
     return () => {
+      window.removeEventListener('calBookingComplete', handleBookingComplete as EventListener);
       if (document.body.contains(script)) {
         document.body.removeChild(script);
       }
