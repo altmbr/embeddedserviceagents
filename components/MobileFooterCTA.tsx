@@ -2,8 +2,12 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { analytics } from '@/lib/analytics';
 
 export default function MobileFooterCTA() {
+  const handleCtaClick = () => {
+    analytics.ctaClicked('mobile_footer', 'Book a Free AI Strategy Call');
+  };
   return (
     <motion.div
       initial={{ y: 100, opacity: 0 }}
@@ -13,6 +17,7 @@ export default function MobileFooterCTA() {
     >
       <Link
         href="/book"
+        onClick={handleCtaClick}
         className="btn btn-primary w-full py-3 text-base font-semibold"
       >
         Book a Free AI Strategy Call

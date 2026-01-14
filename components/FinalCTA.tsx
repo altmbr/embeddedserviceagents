@@ -2,8 +2,12 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { analytics } from '@/lib/analytics';
 
 export default function FinalCTA() {
+  const handleCtaClick = () => {
+    analytics.ctaClicked('final_cta', 'Book Your Free Strategy Call');
+  };
   return (
     <section className="relative py-24 md:py-32 overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-purple-700">
       {/* Background effects */}
@@ -86,6 +90,7 @@ export default function FinalCTA() {
         >
           <Link
             href="/book"
+            onClick={handleCtaClick}
             className="inline-flex items-center justify-center gap-2 px-10 py-5 text-lg font-semibold rounded-xl bg-white text-blue-700 shadow-strong hover:shadow-xl hover:scale-[1.02] transition-all duration-200"
           >
             Book Your Free Strategy Call

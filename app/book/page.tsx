@@ -1,11 +1,14 @@
 'use client';
 
 import { useEffect } from 'react';
-import { Metadata } from 'next';
 import Link from 'next/link';
+import { analytics, setupCalComTracking } from '@/lib/analytics';
 
 export default function BookPage() {
   useEffect(() => {
+    // Track booking page view
+    analytics.bookingPageViewed();
+
     // Cal.com inline embed code - light theme with blue branding
     const script = document.createElement('script');
     script.type = 'text/javascript';
@@ -22,6 +25,14 @@ export default function BookPage() {
       Cal.ns["30min"]("ui", {"theme":"light","cssVarsPerTheme":{"light":{"cal-brand":"#2563eb"},"dark":{"cal-brand":"#2563eb"}},"hideEventTypeDetails":false,"layout":"month_view"});
     `;
     document.body.appendChild(script);
+
+    // Set up Cal.com event tracking after script loads
+    const setupTracking = () => {
+      setTimeout(() => {
+        setupCalComTracking();
+      }, 2000); // Give Cal.com time to initialize
+    };
+    script.onload = setupTracking;
 
     return () => {
       if (document.body.contains(script)) {

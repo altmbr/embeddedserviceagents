@@ -3,8 +3,12 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { analytics } from '@/lib/analytics';
 
 export default function Header() {
+  const handleCtaClick = () => {
+    analytics.ctaClicked('header', 'Book a Call');
+  };
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -63,6 +67,7 @@ export default function Header() {
         {/* CTA - hidden on mobile, shown on sm+ */}
         <Link
           href="/book"
+          onClick={handleCtaClick}
           className="hidden sm:flex btn btn-primary btn-header py-2.5 px-5 text-sm"
         >
           Book a Call
