@@ -50,7 +50,12 @@ HVAC, Plumbing, Veterinary, Med Spas, Dental, Roofing, Legal, Home Services
 - "Never miss another lead"
 - "AI agents that answer every call, email, and inquiry instantly—24/7"
 - "Your competitors answer faster. Until now."
-- "Built by teams who scaled their own service business to $12M/year"
+- "Respond to every lead in under 3 minutes, automatically"
+
+### Proof Points
+- Built by teams who scaled their own service business to $12M/year
+- Service businesses see 80-230% more revenue
+- 70% stat (third-party credibility)
 
 ### CTA
 - "Book Your Free Strategy Call"
