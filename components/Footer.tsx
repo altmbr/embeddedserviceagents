@@ -1,14 +1,30 @@
 'use client';
 
 import { useState } from 'react';
+import { analytics } from '@/lib/analytics';
 
 export default function Footer() {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [hasStartedForm, setHasStartedForm] = useState(false);
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setEmail(value);
+
+    // Track form started on first keystroke
+    if (!hasStartedForm && value.length > 0) {
+      setHasStartedForm(true);
+      analytics.leadMagnetFormStarted('footer-guide');
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !email.includes('@')) return;
+
+    // Track lead magnet submission
+    analytics.leadMagnetSubmitted('footer-guide', email);
 
     try {
       await fetch('/api/leads', {
@@ -56,7 +72,7 @@ export default function Footer() {
               <input
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={handleEmailChange}
                 placeholder="you@company.com"
                 className="input flex-1"
                 required

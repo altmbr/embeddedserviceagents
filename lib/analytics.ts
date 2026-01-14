@@ -75,6 +75,29 @@ export const analytics = {
     });
   },
 
+  // ---- Lead Magnet Events ----
+  leadMagnetFormStarted: (magnetName: string) => {
+    posthog.capture('lead_magnet_form_started', {
+      magnet_name: magnetName,
+    });
+  },
+
+  leadMagnetSubmitted: (magnetName: string, email: string) => {
+    posthog.capture('lead_magnet_submitted', {
+      magnet_name: magnetName,
+      email,
+      conversion: true,
+      conversion_type: 'lead_magnet',
+    });
+
+    // Identify the user by email
+    posthog.identify(email, {
+      email,
+      lead_magnet: magnetName,
+      lead_magnet_date: new Date().toISOString(),
+    });
+  },
+
   // ---- Additional Engagement Events ----
   sectionViewed: (sectionName: string) => {
     posthog.capture('section_viewed', {

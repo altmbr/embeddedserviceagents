@@ -1,260 +1,265 @@
 # CTA & Conversion Tracking Map
 
 ## Overview
-This document maps every call-to-action (CTA) on the Endless Reply site and how they're tracked through the conversion funnel.
+This document maps every call-to-action (CTA) and conversion point on the Endless Reply site and how they're tracked through PostHog.
 
 ---
 
-## Complete User Journey Flow
+## Two Conversion Paths
 
+### Path A: Booking Conversion (Primary)
+Users who book a call - either from landing page CTAs or direct ad traffic to /book.
+
+### Path B: Lead Magnet Conversion (Secondary)
+Users who download the free guide via footer email form.
+
+---
+
+## Path A: Booking Flow
+
+### Flow 1: Organic/Landing Page → Book
+```
+Landing Page (/) - Track: $pageview + UTM params
+    ↓
+User sees one of 6 CTAs
+    ↓
+CTA Clicked - Track: cta_clicked
+    ├─ cta_location: "hero" | "header" | "pricing" | "final_cta" | "mobile_footer"
+    └─ cta_text: exact button text
+    ↓
+Booking Page (/book) - Track: booking_page_viewed
+    ↓
+[Cal.com Calendar Funnel - see below]
+```
+
+### Flow 2: Direct Ad Traffic → Book
 ```
 Ad Click (Google/Facebook/LinkedIn)
     ↓
-Landing Page (/) - Track: $pageview + UTM params
+Booking Page (/book) - Track: $pageview + UTM params
     ↓
-┌───────────────────────────────────────────────┐
-│ User sees one of 5-6 CTAs                     │
-│ (Hero, Header, Pricing x3, Final, Mobile)     │
-└───────────────────────────────────────────────┘
+[Cal.com Calendar Funnel - see below]
+```
+
+### Cal.com Calendar Funnel (Both Flows)
+```
+Calendar Loads
     ↓
-CTA Clicked - Track: cta_clicked (funnel_step: 2)
+User Clicks Date - Track: calendar_date_selected
+    ├─ selected_date: "2026-01-15"
+    └─ funnel_step: 4
     ↓
-Booking Page (/book) - Track: booking_page_viewed (funnel_step: 3)
+User Selects Time - Track: time_slot_selected
+    ├─ selected_date, selected_time
+    └─ funnel_step: 5
     ↓
-Cal.com Calendar Loads
+User Starts Form - Track: booking_form_started
+    └─ funnel_step: 6
     ↓
-User Clicks Date - Track: calendar_date_selected (funnel_step: 4)
+User Completes Booking - Track: booking_completed + $conversion
+    ├─ date, time, email
+    ├─ funnel_step: 7
+    ├─ conversion: true
+    └─ User identified by email
     ↓
-User Selects Time - Track: time_slot_selected (funnel_step: 5)
-    ↓
-User Starts Form - Track: booking_form_started (funnel_step: 6)
-    ↓
-User Completes Booking - Track: booking_completed + $conversion (funnel_step: 7)
-    ↓
-CONVERSION ✓
+BOOKING CONVERSION ✓
 ```
 
 ---
 
-## All CTAs on Site
+## Path B: Lead Magnet Flow
 
-### 1. Hero Section CTA
-- **Location**: Hero component (top of homepage)
-- **Button Text**: "Book Your Free Strategy Call"
-- **Tracking**:
-  - Event: `cta_clicked`
-  - Properties:
-    - `cta_location`: `"hero"`
-    - `cta_text`: `"Book Your Free Strategy Call"`
-    - `funnel_step`: `2`
-- **Component**: `/components/Hero.tsx:106-111`
-- **Destination**: `/book`
+```
+Landing Page (/) - Track: $pageview + UTM params
+    ↓
+User scrolls to Footer
+    ↓
+User starts typing email - Track: lead_magnet_form_started
+    └─ magnet_name: "footer-guide"
+    ↓
+User submits email - Track: lead_magnet_submitted
+    ├─ magnet_name: "footer-guide"
+    ├─ email: user's email
+    ├─ conversion: true
+    ├─ conversion_type: "lead_magnet"
+    └─ User identified by email
+    ↓
+LEAD MAGNET CONVERSION ✓
+```
 
-### 2. Header CTA
-- **Location**: Header (sticky navigation, visible on scroll)
-- **Button Text**: "Book a Call"
-- **Visibility**: Hidden on mobile, shown on `sm` breakpoint and up
-- **Tracking**:
-  - Event: `cta_clicked`
-  - Properties:
-    - `cta_location`: `"header"`
-    - `cta_text`: `"Book a Call"`
-    - `funnel_step`: `2`
-- **Component**: `/components/Header.tsx:68-74`
-- **Destination**: `/book`
+---
 
-### 3. Pricing Section CTAs (3x)
-- **Location**: Pricing component (mid-page)
-- **Button Text**: "Book a Call"
-- **Tiers**:
-  1. **Starter** - $299/month
-  2. **Professional** - $699/month (Most Popular)
-  3. **Enterprise** - Custom pricing
-- **Tracking** (for each tier):
-  - Event: `cta_clicked`
-  - Properties:
-    - `cta_location`: `"pricing"`
-    - `cta_text`: `"{tier.name} - Book a Call"` (e.g., "Starter - Book a Call")
-    - `funnel_step`: `2`
-- **Component**: `/components/Pricing.tsx:168-178`
-- **Destination**: `/book`
+## All CTAs with Full Tracking Detail
 
-### 4. Final CTA Section
-- **Location**: Bottom of homepage (before footer)
-- **Button Text**: "Book Your Free Strategy Call"
-- **Context**: Blue gradient section with "2026 Kickoff Special" badge
-- **Tracking**:
-  - Event: `cta_clicked`
-  - Properties:
-    - `cta_location`: `"final_cta"`
-    - `cta_text`: `"Book Your Free Strategy Call"`
-    - `funnel_step`: `2`
-- **Component**: `/components/FinalCTA.tsx:91-100`
-- **Destination**: `/book`
+### Hero CTA
+| Property | Value |
+|----------|-------|
+| Location | Hero section (above fold) |
+| Button Text | "Book Your Free Strategy Call" |
+| Event | `cta_clicked` |
+| `cta_location` | `"hero"` |
+| `cta_text` | `"Book Your Free Strategy Call"` |
+| Destination | `/book` |
+| Component | `/components/Hero.tsx:106-111` |
 
-### 5. Mobile Footer CTA
-- **Location**: Fixed sticky footer (mobile only)
-- **Button Text**: "Book a Free AI Strategy Call"
-- **Visibility**: Only shown on mobile (`sm:hidden`)
-- **Behavior**: Animated on load, stays fixed at bottom
-- **Tracking**:
-  - Event: `cta_clicked`
-  - Properties:
-    - `cta_location`: `"mobile_footer"`
-    - `cta_text`: `"Book a Free AI Strategy Call"`
-    - `funnel_step`: `2`
-- **Component**: `/components/MobileFooterCTA.tsx:18-24`
-- **Destination**: `/book`
+### Header CTA
+| Property | Value |
+|----------|-------|
+| Location | Sticky header (desktop only) |
+| Button Text | "Book a Call" |
+| Event | `cta_clicked` |
+| `cta_location` | `"header"` |
+| `cta_text` | `"Book a Call"` |
+| Destination | `/book` |
+| Visibility | Hidden on mobile |
+| Component | `/components/Header.tsx:68-74` |
 
-### 6. Hero Secondary CTA
-- **Location**: Hero section (next to primary CTA)
-- **Button Text**: "See How It Works"
-- **Tracking**: NOT tracked (anchor link only)
-- **Component**: `/components/Hero.tsx:112-114`
-- **Destination**: `#how-it-works` (anchor link on same page)
+### Pricing CTAs (3 tiers)
+
+**Starter Tier**
+| Property | Value |
+|----------|-------|
+| `cta_location` | `"pricing"` |
+| `cta_text` | `"Starter - Book a Call"` |
+
+**Professional Tier**
+| Property | Value |
+|----------|-------|
+| `cta_location` | `"pricing"` |
+| `cta_text` | `"Professional - Book a Call"` |
+
+**Enterprise Tier**
+| Property | Value |
+|----------|-------|
+| `cta_location` | `"pricing"` |
+| `cta_text` | `"Enterprise - Book a Call"` |
+
+Component: `/components/Pricing.tsx:168-178`
+
+### Final CTA
+| Property | Value |
+|----------|-------|
+| Location | Bottom of page (blue gradient section) |
+| Button Text | "Book Your Free Strategy Call" |
+| Event | `cta_clicked` |
+| `cta_location` | `"final_cta"` |
+| `cta_text` | `"Book Your Free Strategy Call"` |
+| Destination | `/book` |
+| Component | `/components/FinalCTA.tsx:91-100` |
+
+### Mobile Footer CTA
+| Property | Value |
+|----------|-------|
+| Location | Fixed sticky footer |
+| Button Text | "Book a Free AI Strategy Call" |
+| Event | `cta_clicked` |
+| `cta_location` | `"mobile_footer"` |
+| `cta_text` | `"Book a Free AI Strategy Call"` |
+| Destination | `/book` |
+| Visibility | Mobile only (`sm:hidden`) |
+| Component | `/components/MobileFooterCTA.tsx:18-24` |
+
+### Footer Lead Magnet (NOT a CTA - separate conversion)
+| Property | Value |
+|----------|-------|
+| Location | Footer section |
+| Form Type | Email submission |
+| Lead Magnet | "7 Response Time Mistakes" guide |
+| Events | `lead_magnet_form_started`, `lead_magnet_submitted` |
+| `magnet_name` | `"footer-guide"` |
+| Component | `/components/Footer.tsx` |
 
 ---
 
 ## CTA Summary Table
 
-| CTA Location | Button Text | Visibility | Tracking Location | Destination |
-|--------------|-------------|------------|-------------------|-------------|
-| Hero | Book Your Free Strategy Call | All devices | `hero` | `/book` |
-| Header | Book a Call | Desktop only (sm+) | `header` | `/book` |
-| Pricing - Starter | Book a Call | All devices | `pricing` + tier name | `/book` |
-| Pricing - Professional | Book a Call | All devices | `pricing` + tier name | `/book` |
-| Pricing - Enterprise | Book a Call | All devices | `pricing` + tier name | `/book` |
-| Final CTA | Book Your Free Strategy Call | All devices | `final_cta` | `/book` |
-| Mobile Footer | Book a Free AI Strategy Call | Mobile only | `mobile_footer` | `/book` |
-| Hero Secondary | See How It Works | All devices | Not tracked | `#how-it-works` |
+| CTA Location | Button Text | `cta_location` | `cta_text` | Visibility |
+|--------------|-------------|----------------|------------|------------|
+| Hero | Book Your Free Strategy Call | `hero` | `Book Your Free Strategy Call` | All |
+| Header | Book a Call | `header` | `Book a Call` | Desktop |
+| Pricing - Starter | Book a Call | `pricing` | `Starter - Book a Call` | All |
+| Pricing - Professional | Book a Call | `pricing` | `Professional - Book a Call` | All |
+| Pricing - Enterprise | Book a Call | `pricing` | `Enterprise - Book a Call` | All |
+| Final CTA | Book Your Free Strategy Call | `final_cta` | `Book Your Free Strategy Call` | All |
+| Mobile Footer | Book a Free AI Strategy Call | `mobile_footer` | `Book a Free AI Strategy Call` | Mobile |
 
-**Total Conversion-Driving CTAs**: 7 (all lead to `/book`)
+**In PostHog**: Filter `cta_clicked` events by `cta_location` or `cta_text` to see exactly which CTAs perform best.
 
 ---
 
-## Conversion Funnel Events
+## All Events Reference
 
-### Funnel Step 1: Landing Page View
-- **Event**: `$pageview`
-- **Triggered**: Automatically by PostHogProvider on every page load
-- **Properties Captured**:
-  - `page_path`: Current page URL
-  - `utm_source`: Ad source (google, facebook, linkedin)
-  - `utm_medium`: Marketing medium (cpc, social, email)
-  - `utm_campaign`: Campaign name
-  - `utm_content`: Ad variation
-  - `utm_term`: Search keywords
-  - `gclid`: Google Ads click ID
-  - `fbclid`: Facebook click ID
-- **Component**: `/components/PostHogProvider.tsx:25-46`
+### Page View Events
+| Event | When | Key Properties |
+|-------|------|----------------|
+| `$pageview` | Every page load | `page_path`, `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`, `gclid`, `fbclid` |
 
-### Funnel Step 2: CTA Clicked
-- **Event**: `cta_clicked`
-- **Triggered**: When user clicks any CTA button
-- **Properties**:
-  - `cta_location`: Where the CTA was clicked (hero, header, pricing, final_cta, mobile_footer)
-  - `cta_text`: Text of the button clicked
-  - `funnel_step`: `2`
-- **Components**: All CTA components listed above
+### Booking Funnel Events
+| Event | Funnel Step | When | Key Properties |
+|-------|-------------|------|----------------|
+| `cta_clicked` | 2 | CTA button clicked | `cta_location`, `cta_text` |
+| `booking_page_viewed` | 3 | /book page loads | - |
+| `calendar_date_selected` | 4 | Date clicked in Cal.com | `selected_date` |
+| `time_slot_selected` | 5 | Time slot chosen | `selected_date`, `selected_time` |
+| `booking_form_started` | 6 | Form interaction begins | - |
+| `booking_completed` | 7 | Booking confirmed | `date`, `time`, `email`, `conversion: true` |
+| `$conversion` | 7 | (Also fired) | `conversion_type: "booking"` |
 
-### Funnel Step 3: Booking Page Viewed
-- **Event**: `booking_page_viewed`
-- **Triggered**: When `/book` page loads
-- **Properties**:
-  - `funnel_step`: `3`
-- **Component**: `/app/book/page.tsx:10`
-
-### Funnel Step 4: Calendar Date Selected
-- **Event**: `calendar_date_selected`
-- **Triggered**: When user clicks a date in Cal.com calendar
-- **Properties**:
-  - `selected_date`: Date user clicked
-  - `funnel_step`: `4`
-- **Component**: `/lib/analytics.ts:164-169` (Cal.com listener)
-
-### Funnel Step 5: Time Slot Selected
-- **Event**: `time_slot_selected`
-- **Triggered**: When user selects a time slot
-- **Properties**:
-  - `selected_date`: Date of booking
-  - `selected_time`: Time slot selected
-  - `funnel_step`: `5`
-- **Component**: `/lib/analytics.ts:171-176` (Cal.com listener)
-
-### Funnel Step 6: Booking Form Started
-- **Event**: `booking_form_started`
-- **Triggered**: When user starts filling out Cal.com booking form
-- **Properties**:
-  - `funnel_step`: `6`
-- **Component**: `/lib/analytics.ts:157-162` (Cal.com listener)
-
-### Funnel Step 7: Booking Completed ✓
-- **Event**: `booking_completed` + `$conversion`
-- **Triggered**: When user successfully completes booking
-- **Properties**:
-  - `date`: Booking date
-  - `time`: Booking start time
-  - `email`: User's email
-  - `funnel_step`: `7`
-  - `conversion`: `true`
-- **Component**: `/lib/analytics.ts:138-155` (Cal.com listener)
-- **Additional**: User is identified by email via `posthog.identify()`
+### Lead Magnet Events
+| Event | When | Key Properties |
+|-------|------|----------------|
+| `lead_magnet_form_started` | First keystroke in email field | `magnet_name` |
+| `lead_magnet_submitted` | Email form submitted | `magnet_name`, `email`, `conversion: true`, `conversion_type: "lead_magnet"` |
 
 ---
 
 ## UTM Parameter Flow
 
-All UTM parameters captured on initial page view persist through the user's session:
+UTM params are captured on the FIRST page view and persist across the session:
 
-1. **User clicks ad**: `endlessreply.com?utm_source=google&utm_medium=cpc&utm_campaign=jan_launch`
-2. **Landing page loads**: PostHog captures all UTM params
-3. **User clicks CTA**: `cta_clicked` event inherits UTM params from session
-4. **User navigates to /book**: `booking_page_viewed` event inherits UTM params
-5. **User completes booking**: `booking_completed` event inherits UTM params
+**Landing on /** (organic):
+- UTMs captured on landing page
+- Persist through CTA click → /book → booking complete
 
-**Result**: Every event in the funnel is tied back to the original ad source.
+**Landing on /book** (direct ad traffic):
+- UTMs captured directly on booking page
+- Persist through calendar → booking complete
 
----
-
-## Additional Tracking Available (Not Currently Used)
-
-These analytics functions exist but aren't currently implemented on the site:
-
-- `sectionViewed(sectionName)` - Track when sections come into view
-- `faqExpanded(question)` - Track which FAQ questions users open
-- `pricingViewed(tier)` - Track when pricing tiers come into viewport
-- `externalLinkClicked(url, context)` - Track clicks to external sites
-- `scrollDepthReached(depth)` - Track how far users scroll (25%, 50%, 75%, 100%)
-- `timeOnPage(seconds, pagePath)` - Track time spent on pages
-
-These can be added in the future for deeper engagement insights.
+All events inherit the session's UTM attribution via `posthog.register()`.
 
 ---
 
-## Key Metrics to Track in PostHog
+## Ad Campaign URL Examples
 
-### Primary Conversion Metrics
-1. **Landing to CTA Rate** = (`cta_clicked` / `$pageview`) × 100
-2. **CTA to Booking Page Rate** = (`booking_page_viewed` / `cta_clicked`) × 100
-3. **Booking Page to Conversion** = (`booking_completed` / `booking_page_viewed`) × 100
-4. **Overall Conversion Rate** = (`booking_completed` / `$pageview`) × 100
+### Landing Page Traffic
+```
+https://endlessreply.com?utm_source=google&utm_medium=cpc&utm_campaign=jan_launch&utm_content=headline_a
+```
 
-### CTA Performance
-- **Best Performing CTA**: Break down `cta_clicked` by `cta_location`
-- **Best Pricing Tier**: Break down pricing CTA clicks by tier name
+### Direct to Booking Page (Recommended for Ads)
+```
+https://endlessreply.com/book?utm_source=google&utm_medium=cpc&utm_campaign=jan_launch&utm_content=book_direct
+```
 
-### Ad Attribution
-- **Best Traffic Source**: Break down conversions by `utm_source`
-- **Best Campaign**: Break down conversions by `utm_campaign`
-- **Best Ad Variation**: Break down conversions by `utm_content`
+---
 
-### Drop-off Points
-- Step 1 → 2: Users who land but don't click CTA
-- Step 2 → 3: Users who click CTA but don't reach booking page
-- Step 3 → 4: Users who see calendar but don't click a date
-- Step 4 → 5: Users who click date but don't select time
-- Step 5 → 6: Users who select time but don't start form
-- Step 6 → 7: Users who start form but don't complete booking
+## PostHog Queries
+
+### Which CTAs drive the most bookings?
+1. Create Funnel: `cta_clicked` → `booking_completed`
+2. Break down by: `cta_location`
+
+### Which pricing tier gets the most clicks?
+1. Event: `cta_clicked`
+2. Filter: `cta_location` = `pricing`
+3. Break down by: `cta_text`
+
+### Direct ad traffic vs landing page traffic?
+1. Event: `booking_completed`
+2. Break down by first `page_path` (landing page vs /book)
+
+### Lead magnet conversion rate?
+1. Funnel: `$pageview` → `lead_magnet_submitted`
 
 ---
 
@@ -262,15 +267,15 @@ These can be added in the future for deeper engagement insights.
 
 | File | Purpose |
 |------|---------|
-| `/components/PostHogProvider.tsx` | PostHog initialization, page view tracking, UTM capture |
-| `/lib/analytics.ts` | All tracking event functions, Cal.com event listeners |
+| `/components/PostHogProvider.tsx` | PostHog init, page views, UTM capture, session attribution |
+| `/lib/analytics.ts` | All tracking functions, Cal.com listeners |
 | `/components/Hero.tsx` | Hero CTA tracking |
 | `/components/Header.tsx` | Header CTA tracking |
 | `/components/Pricing.tsx` | Pricing tier CTA tracking |
 | `/components/FinalCTA.tsx` | Final CTA tracking |
 | `/components/MobileFooterCTA.tsx` | Mobile footer CTA tracking |
-| `/app/book/page.tsx` | Booking page view tracking, Cal.com embed |
-| `/POSTHOG_SETUP.md` | PostHog dashboard configuration guide |
+| `/components/Footer.tsx` | Lead magnet form tracking |
+| `/app/book/page.tsx` | Booking page view, Cal.com embed setup |
 
 ---
 
