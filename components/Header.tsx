@@ -2,12 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
-interface HeaderProps {
-  onCtaClick: () => void;
-}
-
-export default function Header({ onCtaClick }: HeaderProps) {
+export default function Header() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -64,12 +61,12 @@ export default function Header({ onCtaClick }: HeaderProps) {
         </nav>
 
         {/* CTA - hidden on mobile, shown on sm+ */}
-        <button
-          onClick={onCtaClick}
+        <Link
+          href="/book"
           className="hidden sm:flex btn btn-primary btn-header py-2.5 px-5 text-sm"
         >
           Book a Call
-        </button>
+        </Link>
       </div>
     </motion.header>
   );

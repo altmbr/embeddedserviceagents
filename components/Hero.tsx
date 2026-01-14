@@ -1,12 +1,9 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
-interface HeroProps {
-  onCtaClick: () => void;
-}
-
-export default function Hero({ onCtaClick }: HeroProps) {
+export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20 pb-32 overflow-hidden">
       {/* Background gradient mesh */}
@@ -102,12 +99,12 @@ export default function Hero({ onCtaClick }: HeroProps) {
           transition={{ duration: 0.6, delay: 0.5 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <button onClick={onCtaClick} className="btn btn-primary text-base px-8 py-4">
+          <Link href="/book" className="btn btn-primary text-base px-8 py-4">
             Book Your Free Strategy Call
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path d="M3.33334 8H12.6667M12.6667 8L8.66668 4M12.6667 8L8.66668 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-          </button>
+          </Link>
           <a href="#how-it-works" className="btn btn-secondary text-base">
             See How It Works
           </a>

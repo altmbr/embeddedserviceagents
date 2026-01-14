@@ -1,12 +1,9 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
-interface FinalCTAProps {
-  onCtaClick: () => void;
-}
-
-export default function FinalCTA({ onCtaClick }: FinalCTAProps) {
+export default function FinalCTA() {
   return (
     <section className="relative py-24 md:py-32 overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-purple-700">
       {/* Background effects */}
@@ -87,15 +84,15 @@ export default function FinalCTA({ onCtaClick }: FinalCTAProps) {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <button
-            onClick={onCtaClick}
+          <Link
+            href="/book"
             className="inline-flex items-center justify-center gap-2 px-10 py-5 text-lg font-semibold rounded-xl bg-white text-blue-700 shadow-strong hover:shadow-xl hover:scale-[1.02] transition-all duration-200"
           >
             Book Your Free Strategy Call
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <path d="M4.16666 10H15.8333M15.8333 10L10.8333 5M15.8333 10L10.8333 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-          </button>
+          </Link>
         </motion.div>
 
         {/* Micro-copy */}

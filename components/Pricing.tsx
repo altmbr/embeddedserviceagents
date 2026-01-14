@@ -1,10 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-
-interface PricingProps {
-  onCtaClick: () => void;
-}
+import Link from 'next/link';
 
 const tiers = [
   {
@@ -58,7 +55,7 @@ const tiers = [
   },
 ];
 
-export default function Pricing({ onCtaClick }: PricingProps) {
+export default function Pricing() {
   return (
     <section id="pricing" className="relative py-24 md:py-32 overflow-hidden bg-gray-50/50">
       {/* Background */}
@@ -167,16 +164,16 @@ export default function Pricing({ onCtaClick }: PricingProps) {
                 </ul>
 
                 {/* CTA */}
-                <button
-                  onClick={onCtaClick}
-                  className={`w-full py-3 px-6 rounded-xl font-semibold transition-all duration-200 ${
+                <Link
+                  href="/book"
+                  className={`w-full py-3 px-6 rounded-xl font-semibold transition-all duration-200 text-center ${
                     tier.highlighted
                       ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-md hover:shadow-lg'
                       : 'bg-gray-100 text-text-primary hover:bg-gray-200'
                   }`}
                 >
                   {tier.cta}
-                </button>
+                </Link>
               </div>
             </motion.div>
           ))}
