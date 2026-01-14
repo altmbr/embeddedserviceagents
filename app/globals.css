@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap');
-@import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -34,7 +33,7 @@ html {
 body {
   background: var(--base);
   color: var(--text-primary);
-  font-family: 'Satoshi', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -59,7 +58,7 @@ body {
 
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Syne', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.02em;
@@ -123,7 +122,7 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: center;
   gap: 0.5rem;
   padding: 0.875rem 1.75rem;
-  font-family: 'Satoshi', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   font-weight: 600;
   font-size: 0.9375rem;
   border-radius: 10px;
@@ -226,7 +225,7 @@ h1, h2, h3, h4, h5, h6 {
   border: 1.5px solid var(--base-200);
   border-radius: 10px;
   color: var(--text-primary);
-  font-family: 'Satoshi', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   font-size: 1rem;
   transition: all 0.2s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
@@ -293,7 +292,7 @@ h1, h2, h3, h4, h5, h6 {
   background: linear-gradient(135deg, var(--accent-muted) 0%, white 100%);
   border: 1.5px solid var(--accent);
   border-radius: 12px;
-  font-family: 'Syne', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   font-weight: 700;
   font-size: 1.125rem;
   color: var(--accent);
