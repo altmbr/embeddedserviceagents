@@ -106,8 +106,7 @@ export default function BookPage() {
             <div className="p-4 md:p-8">
               <div
                 id="my-cal-inline-30min"
-                className="w-full"
-                style={{ width: '100%', height: '700px', overflow: 'scroll' }}
+                className="w-full min-h-[600px] md:h-[700px] md:overflow-auto"
               />
             </div>
           </div>
