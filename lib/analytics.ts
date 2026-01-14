@@ -92,13 +92,7 @@ export const analytics = {
       conversion_value: 1, // You can add monetary value here later
     });
 
-    // Meta Pixel - track as Lead conversion with metadata
-    if (typeof window !== 'undefined' && window.fbq) {
-      window.fbq('track', 'Lead', {
-        content_name: '30 Minute Strategy Call',
-        content_category: 'booking',
-      });
-    }
+    // Note: Meta Pixel Lead event is fired directly in Cal.com callback (book/page.tsx)
   },
 
   // ---- Lead Magnet Events ----
