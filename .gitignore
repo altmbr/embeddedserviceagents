@@ -2,6 +2,7 @@
 node_modules/
 .pnp
 .pnp.js
+.pnpm-store
 
 # Testing
 coverage/
@@ -24,6 +25,7 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
+.env*.local
 
 # Vercel
 .vercel
@@ -34,6 +36,7 @@ next-env.d.ts
 
 # OS
 .DS_Store
+*.pem
 *.swp
 *.swo
 *~
@@ -43,3 +46,6 @@ next-env.d.ts
 .idea/
 *.sublime-project
 *.sublime-workspace
+
+# Leads file (contains PII)
+leads.json
