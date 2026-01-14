@@ -1,5 +1,12 @@
 import posthog from 'posthog-js';
 
+// Meta Pixel helper - safely call fbq if loaded
+declare global {
+  interface Window {
+    fbq?: (...args: any[]) => void;
+  }
+}
+
 // ============================================
 // CONVERSION FUNNEL EVENTS
 // ============================================
@@ -84,6 +91,11 @@ export const analytics = {
       conversion_type: 'booking',
       conversion_value: 1, // You can add monetary value here later
     });
+
+    // Meta Pixel - track as Lead conversion
+    if (typeof window !== 'undefined' && window.fbq) {
+      window.fbq('track', 'Lead');
+    }
   },
 
   // ---- Lead Magnet Events ----
