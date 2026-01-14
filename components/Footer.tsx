@@ -94,13 +94,13 @@ export default function Footer() {
                 </svg>
               </div>
               <div className="text-left">
-                <div className="font-display font-bold text-lg text-text-primary">InboundAI</div>
+                <div className="font-display font-bold text-lg text-text-primary">Endless Reply</div>
                 <div className="text-xs text-text-muted">Never miss another lead</div>
               </div>
             </div>
 
             <div className="flex items-center gap-2 text-sm text-text-muted">
-              <span>&copy; {new Date().getFullYear()} InboundAI.</span>
+              <span>&copy; {new Date().getFullYear()} Endless Reply.</span>
               <span className="hidden sm:inline">•</span>
               <span className="hidden sm:inline">All rights reserved.</span>
             </div>

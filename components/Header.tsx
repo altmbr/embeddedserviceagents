@@ -47,7 +47,7 @@ export default function Header() {
             </svg>
           </div>
           <span className="font-display font-bold text-base sm:text-lg text-text-primary">
-            InboundAI
+            Endless Reply
           </span>
         </a>
 
