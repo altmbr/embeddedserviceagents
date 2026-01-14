@@ -42,7 +42,7 @@ export default function BookPage() {
   }, []);
 
   return (
-    <main className="relative min-h-screen">
+    <main className="relative min-h-screen overflow-x-hidden">
       {/* Background gradient mesh */}
       <div className="absolute inset-0 gradient-mesh" />
 
