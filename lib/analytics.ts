@@ -45,10 +45,16 @@ export const analytics = {
   },
 
   // ---- Funnel Step 3: Booking Page ----
-  bookingPageViewed: () => {
+  bookingPageViewed: (options?: { page_variant?: string }) => {
     posthog.capture('booking_page_viewed', {
       funnel_step: 3,
+      page_variant: options?.page_variant || 'unknown',
     });
+
+    // Register as super property so all subsequent events include it
+    if (options?.page_variant) {
+      posthog.register({ booking_page_variant: options.page_variant });
+    }
   },
 
   // ---- Funnel Step 4: Calendar Interaction ----
@@ -80,6 +86,7 @@ export const analytics = {
     date?: string;
     time?: string;
     email?: string;
+    page_variant?: string;
   }) => {
     posthog.capture('booking_completed', {
       ...eventData,
@@ -90,7 +97,8 @@ export const analytics = {
     // Also track as a conversion event for ad platforms
     posthog.capture('$conversion', {
       conversion_type: 'booking',
-      conversion_value: 1, // You can add monetary value here later
+      conversion_value: 1,
+      page_variant: eventData?.page_variant,
     });
 
     // Note: Meta Pixel Lead event is fired directly in Cal.com callback (book/page.tsx)

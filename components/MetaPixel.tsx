@@ -73,6 +73,7 @@ export function trackMetaEvent(
 export function trackLead(params?: {
   content_name?: string;
   content_category?: string;
+  content_id?: string;  // Used to identify page variant for A/B testing
   value?: number;
   currency?: string;
 }) {

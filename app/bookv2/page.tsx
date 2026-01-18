@@ -50,8 +50,8 @@ const features = [
 
 export default function BookV2Page() {
   useEffect(() => {
-    // Track booking page view
-    analytics.bookingPageViewed();
+    // Track booking page view with variant identifier for A/B testing
+    analytics.bookingPageViewed({ page_variant: 'v2_mobile_optimized' });
 
     // Cal.com inline embed code - light theme with blue branding
     const script = document.createElement('script');
@@ -81,17 +81,19 @@ export default function BookV2Page() {
 
     // Listen for booking complete event from Cal.com
     const handleBookingComplete = (e: CustomEvent) => {
-      // Track in PostHog
+      // Track in PostHog with page variant for A/B testing
       analytics.bookingCompleted({
         date: e.detail?.date,
         time: e.detail?.startTime,
         email: e.detail?.attendee?.email,
+        page_variant: 'v2_mobile_optimized',
       });
 
-      // Track Meta Pixel Lead event
+      // Track Meta Pixel Lead event with content_id for A/B filtering
       trackLead({
         content_name: '30 Minute Strategy Call',
         content_category: 'booking',
+        content_id: 'book_v2',
       });
 
       if (e.detail?.attendee?.email) {
