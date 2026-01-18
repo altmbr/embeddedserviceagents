@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import Link from 'next/link';
 import { analytics } from '@/lib/analytics';
+import { trackLead } from '@/components/MetaPixel';
 
 export default function BookPage() {
   useEffect(() => {
@@ -29,14 +30,7 @@ export default function BookPage() {
         action: "bookingSuccessful",
         callback: function(e) {
           console.log("Cal.com booking successful", e);
-          // Fire Meta Pixel Lead event
-          if (window.fbq) {
-            window.fbq('track', 'Lead', {
-              content_name: '30 Minute Strategy Call',
-              content_category: 'booking'
-            });
-          }
-          // Dispatch custom event for React to pick up
+          // Dispatch custom event for React to pick up (includes Meta Pixel tracking)
           window.dispatchEvent(new CustomEvent('calBookingComplete', { detail: e.data }));
         }
       });
@@ -45,11 +39,19 @@ export default function BookPage() {
 
     // Listen for booking complete event from Cal.com
     const handleBookingComplete = (e: CustomEvent) => {
+      // Track in PostHog
       analytics.bookingCompleted({
         date: e.detail?.date,
         time: e.detail?.startTime,
         email: e.detail?.attendee?.email,
       });
+
+      // Track Meta Pixel Lead event
+      trackLead({
+        content_name: '30 Minute Strategy Call',
+        content_category: 'booking',
+      });
+
       if (e.detail?.attendee?.email) {
         analytics.identifyUser(e.detail.attendee.email, {
           name: e.detail.attendee.name,
